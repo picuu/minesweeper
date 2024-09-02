@@ -9,7 +9,7 @@ defineFeature(feature, (test) => {
       steps.openTheGame()
     })
     then('the button status should show a happy face', () => {
-      pending()
+      expect(steps.isHappyFace()).toBe(true)
     })
   })
 

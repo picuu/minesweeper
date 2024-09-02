@@ -194,3 +194,24 @@ export function areCellsAroundACellUncovered (rowPosition, colPosition) {
   }
   return result
 }
+
+/* ---------------------------------------------------------------------------------------------- */
+
+function getStatusButton () {
+  return (screen.getByTestId('status-button', { exact: true }))
+}
+
+function isAltTextInStatusButton (altText) {
+  const statusButton = getStatusButton()
+  const images = statusButton.getElementsByTagName('img')
+  if (images.length !== 1) {
+    return false
+  } else {
+    const imgAltText = images[0].alt
+    return imgAltText === altText
+  }
+}
+
+export function isHappyFace () {
+  return isAltTextInStatusButton('happy face')
+}
