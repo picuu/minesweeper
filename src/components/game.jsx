@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react'
 import Minefield from './minefield'
 import MockDataForm from './mockDataForm'
 import { StatusButton } from './statusButton'
+import { Timer } from './timer'
 import '@/components/styles/game.css'
 
 export default function Game () {
@@ -33,7 +34,10 @@ export default function Game () {
       <h1>Minesweeper</h1>
       {mockDataFormVisible && <MockDataForm setData={setMockDataForm} />}
       <div className='board'>
-        <StatusButton />
+        <header>
+          <StatusButton />
+          <Timer />
+        </header>
         <Minefield mockData={mockData} />
       </div>
     </div>

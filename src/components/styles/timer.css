@@ -1,0 +1,8 @@
+.timer {
+  height: 22px;
+  border: 2px inset rgb(230, 230, 230);
+}
+
+.timer img {
+  height: 100%;
+}
