@@ -1,3 +1,16 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+h1 {
+  width: fit-content;
+  margin: auto;
+  padding-block: 16px;
+  font-family: system-ui, sans-serif;
+}
+
 .board {
   display: flex;
   flex-direction: column;
@@ -5,6 +18,15 @@
   justify-content: center;
   width: fit-content;
   margin: auto;
-  border: 4px ridge rgb(222, 222, 222);
-  background-color: rgb(222, 222, 222);
+  border: 6px ridge rgb(230, 230, 230);
+  background-color: rgb(200, 200, 200);
+}
+
+.board header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 4px;
+  border-bottom: 6px ridge rgb(230, 230, 230);
 }
