@@ -205,6 +205,10 @@ function getTimer () {
   return (screen.getByTestId('timer', { exact: true }))
 }
 
+function getMineCounter () {
+  return (screen.getByTestId('mineCounter', { exact: true }))
+}
+
 function isAltTextInStatusButton (altText) {
   const statusButton = getStatusButton()
   const images = statusButton.getElementsByTagName('img')
@@ -232,5 +236,20 @@ export function getTimerValue () {
 
     console.log(timerValue)
     return timerValue
+  }
+}
+
+export function getMineCounterValue () {
+  const counter = getMineCounter()
+
+  const images = counter.getElementsByTagName('img')
+  if (images.length < 3) return false
+  else {
+    let counterValue = Number(images[images.length - 1].alt)
+    counterValue = counterValue + (10 * Number(images[images.length - 2].alt))
+    counterValue = counterValue + (100 * Number(images[images.length - 3].alt))
+
+    console.log(counterValue)
+    return counterValue
   }
 }
