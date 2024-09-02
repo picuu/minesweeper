@@ -4,6 +4,7 @@ import Minefield from './minefield'
 import MockDataForm from './mockDataForm'
 import { StatusButton } from './statusButton'
 import { Timer } from './timer'
+import { MineCounter } from './mineCounter'
 import '@/components/styles/game.css'
 
 export default function Game () {
@@ -35,6 +36,7 @@ export default function Game () {
       {mockDataFormVisible && <MockDataForm setData={setMockDataForm} />}
       <div className='board'>
         <header>
+          <MineCounter />
           <StatusButton />
           <Timer />
         </header>
