@@ -1,0 +1,11 @@
+.status-button {
+  width: 16px;
+  height: 16px;
+  margin: 0px;
+  padding: 0px; 
+  border: none;
+}
+
+.status-button img {
+  width: 100%;
+}

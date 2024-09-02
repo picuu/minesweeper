@@ -2,13 +2,15 @@
 import { useState, useEffect } from 'react'
 import Minefield from './minefield'
 import MockDataForm from './mockDataForm'
+import { StatusButton } from './statusButton'
+import '@/components/styles/game.css'
 
 export default function Game () {
   const [mockDataFormVisible, setMockDataFormVisible] = useState(false)
   const [mockData, setMockData] = useState('')
 
   useEffect(() => {
-    console.log('useEffect') //TODO Is the best way to do in React?
+    console.log('useEffect') // TODO Is the best way to do in React?
     document.addEventListener('keydown', handleKeyPress)
 
     return () => {
@@ -30,7 +32,10 @@ export default function Game () {
     <div>
       <h1>Minesweeper</h1>
       {mockDataFormVisible && <MockDataForm setData={setMockDataForm} />}
-      <Minefield mockData={mockData} />
+      <div className='board'>
+        <StatusButton />
+        <Minefield mockData={mockData} />
+      </div>
     </div>
   )
 }
