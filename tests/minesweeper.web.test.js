@@ -36,11 +36,11 @@ defineFeature(feature, (test) => {
 
   test('Waiting status, the minefield has all the cells covered', ({ given, then, pending }) => {
     given('the player opens the game', () => {
-      pending()
+      steps.openTheGame()
     })
 
     then('all the minefield cells should be covered', () => {
-      pending()
+      expect(steps.areAllCellsCovered()).toBe(true)
     })
   })
 
