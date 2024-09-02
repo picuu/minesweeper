@@ -201,6 +201,10 @@ function getStatusButton () {
   return (screen.getByTestId('status-button', { exact: true }))
 }
 
+function getTimer () {
+  return (screen.getByTestId('timer', { exact: true }))
+}
+
 function isAltTextInStatusButton (altText) {
   const statusButton = getStatusButton()
   const images = statusButton.getElementsByTagName('img')
@@ -214,4 +218,19 @@ function isAltTextInStatusButton (altText) {
 
 export function isHappyFace () {
   return isAltTextInStatusButton('happy face')
+}
+
+export function getTimerValue () {
+  const timer = getTimer()
+
+  const images = timer.getElementsByTagName('img')
+  if (images.length < 3) return false
+  else {
+    let timerValue = Number(images[images.length - 1].alt)
+    timerValue = timerValue + (10 * Number(images[images.length - 2].alt))
+    timerValue = timerValue + (100 * Number(images[images.length - 3].alt))
+
+    console.log(timerValue)
+    return timerValue
+  }
 }
