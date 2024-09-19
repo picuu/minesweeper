@@ -28,9 +28,9 @@ export default function Cell ({ rowPosition, colPosition, hasMine, numberOfMines
         dispatch(tagCell())
       } else if (isTagged === 'mined') {
         newState = 'inconclusive'
+        dispatch(untagCell())
       } else {
         newState = ''
-        dispatch(untagCell())
       }
       setIsTagged(newState)
     }
