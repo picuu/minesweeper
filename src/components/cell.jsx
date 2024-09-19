@@ -1,8 +1,14 @@
 import { useState } from 'react'
 import './styles/cell.css'
 
-export default function Cell ({ rowPosition, colPosition, hasMine, numberOfMinesAround, gameStatus, isCovered, onClick }) {
+import { useSelector, useDispatch } from 'react-redux'
+import { tagCell, untagCell } from '@/lib/slices/remainingFlagsSlice/remainingFlagsSlice.js'
+import { setGameStatus } from '@/lib/slices/gameStatus/gameStatusSlice.js'
+
+export default function Cell ({ rowPosition, colPosition, hasMine, numberOfMinesAround, isCovered, onClick }) {
   const [isTagged, setIsTagged] = useState('')
+  const { gameStatus } = useSelector(state => state.gameStatus)
+  const dispatch = useDispatch()
 
   function handleClick (e) {
     e.preventDefault()
@@ -13,14 +19,18 @@ export default function Cell ({ rowPosition, colPosition, hasMine, numberOfMines
 
   function handleContextMenu (e) {
     e.preventDefault()
-    if (gameStatus === 'playing') {
+    if (gameStatus === 'playing' || gameStatus === 'waiting') {
+      if (gameStatus === 'waiting') dispatch(setGameStatus('playing'))
+
       let newState = ''
       if (isTagged === '') {
         newState = 'mined'
+        dispatch(tagCell())
       } else if (isTagged === 'mined') {
         newState = 'inconclusive'
       } else {
         newState = ''
+        dispatch(untagCell())
       }
       setIsTagged(newState)
     }
@@ -75,7 +85,7 @@ export default function Cell ({ rowPosition, colPosition, hasMine, numberOfMines
         onContextMenu={handleContextMenu}
         data-testid={`minefield-cell cell-row${rowPosition}-col${colPosition}`}
         className='minefield-cell covered'
-        disabled={gameStatus !== 'playing'}
+        disabled={gameStatus !== 'playing' && gameStatus !== 'waiting'}
       >
         {((hasMine && gameStatus === 'won') || (isTagged === 'mined' && gameStatus === 'playing')) && <img src='/tiles/flagCell.png' alt='Flaged cell' />}
         {(isTagged === 'mined' && !hasMine && gameStatus === 'lost') && <img src='/tiles/notBombCell.png' alt='Wrongly tagged mine' />}

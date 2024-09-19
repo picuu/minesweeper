@@ -7,12 +7,13 @@ import { Timer } from './timer'
 import { MineCounter } from './mineCounter'
 import '@/components/styles/game.css'
 
+import StoreProvider from '@/app/StoreProvider.jsx'
+
 export default function Game () {
   const [mockDataFormVisible, setMockDataFormVisible] = useState(false)
   const [mockData, setMockData] = useState('')
 
   useEffect(() => {
-    console.log('useEffect') // TODO Is the best way to do in React?
     document.addEventListener('keydown', handleKeyPress)
 
     return () => {
@@ -30,18 +31,21 @@ export default function Game () {
       setMockDataFormVisible(!mockDataFormVisible)
     }
   }
+
   return (
     <div>
-      <h1>Minesweeper</h1>
-      {mockDataFormVisible && <MockDataForm setData={setMockDataForm} />}
-      <div className='board'>
-        <header>
-          <MineCounter />
-          <StatusButton />
-          <Timer />
-        </header>
-        <Minefield mockData={mockData} />
-      </div>
+      <StoreProvider>
+        <h1>Minesweeper</h1>
+        {mockDataFormVisible && <MockDataForm setData={setMockDataForm} />}
+        <div className='board'>
+          <header>
+            <MineCounter />
+            <StatusButton />
+            <Timer />
+          </header>
+          <Minefield mockData={mockData} />
+        </div>
+      </StoreProvider>
     </div>
   )
 }

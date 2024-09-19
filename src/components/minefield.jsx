@@ -3,11 +3,15 @@ import * as dataHelper from './helper/mineFieldData'
 import './styles/minefield.css'
 
 import Cell from './cell'
+import { useDispatch, useSelector } from 'react-redux'
+import { setGameStatus } from '@/lib/slices/gameStatus/gameStatusSlice.js'
+import { setRemainingFlags } from '@/lib/slices/remainingFlagsSlice/remainingFlagsSlice.js'
 
 export default function Minefield ({ numberOfRows = 9, numberOfColumns = 9, numberOfMines = 10, mockData }) {
   const [minefieldData, setMinefieldData] = useState([])
   const [cellsToUncover, setCellsToUncover] = useState(-1)
-  const [gameStatus, setGameStatus] = useState('playing')
+  const { gameStatus } = useSelector(state => state.gameStatus)
+  const dispatch = useDispatch()
 
   const directions = [
     { offsetX: 0, offsetY: -1 },
@@ -48,7 +52,7 @@ export default function Minefield ({ numberOfRows = 9, numberOfColumns = 9, numb
       newMinefieldData[row - 1][column - 1].isCovered = false
     }
     if (newMinefieldData[row - 1][column - 1].isMine) {
-      setGameStatus('lost')
+      dispatch(setGameStatus('lost'))
     } else {
       if (newMinefieldData[row - 1][column - 1].numberOfMinesAround === 0) {
         uncoveredCells = uncoverNeighborCells(row, column, newMinefieldData) + 1
@@ -56,7 +60,9 @@ export default function Minefield ({ numberOfRows = 9, numberOfColumns = 9, numb
         uncoveredCells = 1
       }
       if (cellsToUncover - uncoveredCells === 0) {
-        setGameStatus('won')
+        dispatch(setGameStatus('won'))
+      } else {
+        if (gameStatus === 'waiting') dispatch(setGameStatus('playing'))
       }
       setCellsToUncover(cellsToUncover - uncoveredCells)
     }
@@ -78,6 +84,8 @@ export default function Minefield ({ numberOfRows = 9, numberOfColumns = 9, numb
     }
     dataHelper.minefieldNumbering(preData)
     setMinefieldData(preData)
+
+    dispatch(setRemainingFlags(dataHelper.getNumberOfMines(preData)))
   }, [mockData])
 
   return (
@@ -94,7 +102,6 @@ export default function Minefield ({ numberOfRows = 9, numberOfColumns = 9, numb
               hasMine={cell.isMine}
               numberOfMinesAround={cell.numberOfMinesAround}
               onClick={onClick}
-              gameStatus={gameStatus}
               isCovered={cell.isCovered}
             />
           ))}
