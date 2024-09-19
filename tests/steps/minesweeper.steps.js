@@ -261,3 +261,8 @@ export function getMineCounterValue () {
     return counterValue
   }
 }
+
+export function clickStatusButton () {
+  const btn = getStatusButton()
+  fireEvent.click(btn)
+}

@@ -154,15 +154,15 @@ defineFeature(feature, (test) => {
 
   test('the user clicks on the button status, the game is waiting', ({ given, when, then, pending }) => {
     given('the player opens the game', () => {
-      pending()
+      steps.openTheGame()
     })
 
     when('the player clicks on the button status', () => {
-      pending()
+      steps.clickStatusButton()
     })
 
     then('the button status should show a happy face', () => {
-      pending()
+      expect(steps.isHappyFace()).toBe(true)
     })
   })
 
