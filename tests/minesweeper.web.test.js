@@ -168,19 +168,19 @@ defineFeature(feature, (test) => {
 
   test('Tagging a cell as mine, the remaining mines counter decrease', ({ given, when, then, pending }) => {
     given('the player opens the game', () => {
-      pending()
+      steps.openTheGame()
     })
 
     given('the player loads the following mock data', (docString) => {
-      pending()
+      steps.setMockData(docString)
     })
 
-    when(/^the player tags as mined the cell \("(.*)","(.*)"\)$/, (arg0, arg1) => {
-      pending()
+    when(/^the player tags as mined the cell \("(.*)","(.*)"\)$/, (rowPostition, colPosition) => {
+      steps.tagCellAsMined(rowPostition, colPosition)
     })
 
-    then(/^the remaining mines counter should be "(.*)"$/, (arg0) => {
-      pending()
+    then(/^the remaining mines counter should be "(.*)"$/, (mineCountValue) => {
+      expect(steps.getMineCounterValue()).toEqual(Number(mineCountValue))
     })
   })
 
