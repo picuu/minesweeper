@@ -224,6 +224,10 @@ export function isHappyFace () {
   return isAltTextInStatusButton('happy face')
 }
 
+export function isWinFace () {
+  return isAltTextInStatusButton('win face')
+}
+
 export function getTimerValue () {
   const timer = getTimer()
 
