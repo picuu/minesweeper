@@ -228,6 +228,10 @@ export function isWinFace () {
   return isAltTextInStatusButton('win face')
 }
 
+export function isDeadFace () {
+  return isAltTextInStatusButton('dead face')
+}
+
 export function getTimerValue () {
   const timer = getTimer()
 
