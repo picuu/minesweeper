@@ -90,6 +90,14 @@ export function tagCellAsInconclusive (rowPosition, colPosition) {
   }
 }
 
+export function untagCell (rowPosition, colPosition) {
+  if (isNotTagged(rowPosition, colPosition)) return
+
+  if (isTaggedAsMined(rowPosition, colPosition)) fireEvent.contextMenu(getMinefieldCell(rowPosition, colPosition))
+
+  fireEvent.contextMenu(getMinefieldCell(rowPosition, colPosition))
+}
+
 export function isCellUncovered (rowPosition, colPosition) {
   const cell = getMinefieldCell(rowPosition, colPosition)
   if (cell.classList.contains('covered')) {
