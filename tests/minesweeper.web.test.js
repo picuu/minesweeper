@@ -96,23 +96,23 @@ defineFeature(feature, (test) => {
 
   test('Playing status, the timer starts', ({ given, when, and, then, pending }) => {
     given('the player opens the game', () => {
-      pending()
+      steps.openTheGame()
     })
 
     given('the player loads the following mock data', (docString) => {
-      pending()
+      steps.setMockData(docString)
     })
 
-    when(/^the player uncovers the cell \("(.*)","(.*)"\)$/, (arg0, arg1) => {
-      pending()
+    when(/^the player uncovers the cell \("(.*)","(.*)"\)$/, (rowPosition, colPosition) => {
+      steps.uncoverCell(rowPosition, colPosition)
     })
 
-    and(/^the user waits "(.*)" second$/, (arg0) => {
-      pending()
+    and(/^the user waits "(.*)" second$/, async (seconds) => {
+      await new Promise(resolve => setTimeout(resolve, (Number(seconds) * 1000)))
     })
 
-    then(/^the timer should show a number greater than "(.*)"$/, (arg0) => {
-      pending()
+    then(/^the timer should show a number greater than "(.*)"$/, async (seconds) => {
+      expect(steps.getTimerValue() > Number(seconds)).toBe(true)
     })
   })
 
