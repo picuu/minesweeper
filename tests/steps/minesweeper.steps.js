@@ -1,5 +1,6 @@
 import { render, screen, fireEvent } from '@testing-library/react'
 import Game from '../../src/components/game'
+import StoreProvider from '@/app/StoreProvider.jsx'
 
 const directions = [
   { offsetX: 0, offsetY: -1 },
@@ -13,7 +14,11 @@ const directions = [
 ]
 
 export function openTheGame () {
-  render(<Game />)
+  render(
+    <StoreProvider>
+      <Game />
+    </StoreProvider>
+  )
 }
 
 export function mineFieldDimensionsValidation (rows, columns) {
@@ -250,7 +255,6 @@ export function getTimerValue () {
     timerValue = timerValue + (10 * Number(images[images.length - 2].alt))
     timerValue = timerValue + (100 * Number(images[images.length - 3].alt))
 
-    console.log(timerValue)
     return timerValue
   }
 }
@@ -265,7 +269,6 @@ export function getMineCounterValue () {
     counterValue = counterValue + (10 * Number(images[images.length - 2].alt))
     counterValue = counterValue + (100 * Number(images[images.length - 3].alt))
 
-    console.log(counterValue)
     return counterValue
   }
 }
