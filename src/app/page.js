@@ -1,5 +1,3 @@
-'use client'
-
 import Game from '../components/game'
 import StoreProvider from '@/app/StoreProvider.jsx'
 
