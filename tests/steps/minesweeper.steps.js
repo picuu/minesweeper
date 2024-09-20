@@ -265,10 +265,23 @@ export function getMineCounterValue () {
   const images = counter.getElementsByTagName('img')
   if (images.length < 3) return false
   else {
-    let counterValue = Number(images[images.length - 1].alt)
-    counterValue = counterValue + (10 * Number(images[images.length - 2].alt))
-    counterValue = counterValue + (100 * Number(images[images.length - 3].alt))
+    let isNegative = false
+    const checkNegative = (value) => {
+      if (value === '-') {
+        isNegative = true
+        return 0
+      } else return Number(value)
+    }
 
+    const firstDigit = images[images.length - 1].alt
+    const secondDigit = checkNegative(images[images.length - 2].alt)
+    const thirdDigit = checkNegative(images[images.length - 3].alt)
+
+    let counterValue = Number(firstDigit)
+    counterValue = counterValue + (10 * secondDigit)
+    counterValue = counterValue + (100 * thirdDigit)
+
+    if (isNegative) return counterValue * -1
     return counterValue
   }
 }

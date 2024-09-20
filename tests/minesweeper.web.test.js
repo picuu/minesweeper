@@ -208,23 +208,23 @@ defineFeature(feature, (test) => {
 
   test('Tagging as mined more cells than the number of mines, the remaining mines counter is negative', ({ given, and, when, then, pending }) => {
     given('the player opens the game', () => {
-      pending()
+      steps.openTheGame()
     })
 
     given('the player loads the following mock data', (docString) => {
-      pending()
+      steps.setMockData(docString)
     })
 
-    and(/^the player tags as mined the cell \("(.*)","(.*)"\)$/, (arg0, arg1) => {
-      pending()
+    and(/^the player tags as mined the cell \("(.*)","(.*)"\)$/, (rowPosition, colPosition) => {
+      steps.tagCellAsMined(rowPosition, colPosition)
     })
 
-    when(/^the player tags as mined the cell \("(.*)","(.*)"\)$/, (arg0, arg1) => {
-      pending()
+    when(/^the player tags as mined the cell \("(.*)","(.*)"\)$/, (rowPosition, colPosition) => {
+      steps.tagCellAsMined(rowPosition, colPosition)
     })
 
-    then(/^the remaining mines counter should be "(.*)"$/, (arg0) => {
-      pending()
+    then(/^the remaining mines counter should be "(.*)"$/, (mineCounterValue) => {
+      expect(steps.getMineCounterValue()).toEqual(Number(mineCounterValue))
     })
   })
 
