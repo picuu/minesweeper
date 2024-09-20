@@ -4,7 +4,7 @@ import './styles/minefield.css'
 
 import Cell from './cell'
 import { useDispatch, useSelector } from 'react-redux'
-import { setGameStatus } from '@/lib/slices/gameStatus/gameStatusSlice.js'
+import { playGame, winGame, loseGame } from '@/lib/slices/gameStatus/gameStatusSlice.js'
 import { setRemainingFlags } from '@/lib/slices/remainingFlagsSlice/remainingFlagsSlice.js'
 
 export default function Minefield ({ numberOfRows = 9, numberOfColumns = 9, numberOfMines = 10, mockData }) {
@@ -52,7 +52,7 @@ export default function Minefield ({ numberOfRows = 9, numberOfColumns = 9, numb
       newMinefieldData[row - 1][column - 1].isCovered = false
     }
     if (newMinefieldData[row - 1][column - 1].isMine) {
-      dispatch(setGameStatus('lost'))
+      dispatch(loseGame())
     } else {
       if (newMinefieldData[row - 1][column - 1].numberOfMinesAround === 0) {
         uncoveredCells = uncoverNeighborCells(row, column, newMinefieldData) + 1
@@ -60,9 +60,9 @@ export default function Minefield ({ numberOfRows = 9, numberOfColumns = 9, numb
         uncoveredCells = 1
       }
       if (cellsToUncover - uncoveredCells === 0) {
-        dispatch(setGameStatus('won'))
+        dispatch(winGame())
       } else {
-        if (gameStatus === 'waiting') dispatch(setGameStatus('playing'))
+        if (gameStatus === 'waiting') dispatch(playGame())
       }
       setCellsToUncover(cellsToUncover - uncoveredCells)
     }

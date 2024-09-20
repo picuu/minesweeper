@@ -3,7 +3,7 @@ import './styles/cell.css'
 
 import { useSelector, useDispatch } from 'react-redux'
 import { tagCell, untagCell } from '@/lib/slices/remainingFlagsSlice/remainingFlagsSlice.js'
-import { setGameStatus } from '@/lib/slices/gameStatus/gameStatusSlice.js'
+import { playGame } from '@/lib/slices/gameStatus/gameStatusSlice.js'
 
 export default function Cell ({ rowPosition, colPosition, hasMine, numberOfMinesAround, isCovered, onClick }) {
   const [isTagged, setIsTagged] = useState('')
@@ -20,7 +20,7 @@ export default function Cell ({ rowPosition, colPosition, hasMine, numberOfMines
   function handleContextMenu (e) {
     e.preventDefault()
     if (gameStatus === 'playing' || gameStatus === 'waiting') {
-      if (gameStatus === 'waiting') dispatch(setGameStatus('playing'))
+      if (gameStatus === 'waiting') dispatch(playGame())
 
       let newState = ''
       if (isTagged === '') {
