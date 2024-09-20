@@ -8,10 +8,10 @@ export const remainingFlagsSlice = createSlice({
   name: 'remainingFlags',
   initialState,
   reducers: {
-    tagCell: (state) => {
+    decreaseRemainingFlags: (state) => {
       state.remainingFlags = state.remainingFlags - 1
     },
-    untagCell: (state) => {
+    increaseRemainingFlags: (state) => {
       state.remainingFlags = state.remainingFlags + 1
     },
     setRemainingFlags: (state, action) => {
@@ -20,5 +20,5 @@ export const remainingFlagsSlice = createSlice({
   }
 })
 
-export const { tagCell, untagCell, setRemainingFlags } = remainingFlagsSlice.actions
+export const { decreaseRemainingFlags, increaseRemainingFlags, setRemainingFlags } = remainingFlagsSlice.actions
 export default remainingFlagsSlice.reducer

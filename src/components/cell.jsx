@@ -2,7 +2,7 @@ import { useState } from 'react'
 import './styles/cell.css'
 
 import { useSelector, useDispatch } from 'react-redux'
-import { tagCell, untagCell } from '@/lib/slices/remainingFlagsSlice/remainingFlagsSlice.js'
+import { decreaseRemainingFlags, increaseRemainingFlags } from '@/lib/slices/remainingFlagsSlice/remainingFlagsSlice.js'
 import { playGame } from '@/lib/slices/gameStatus/gameStatusSlice.js'
 
 export default function Cell ({ rowPosition, colPosition, hasMine, numberOfMinesAround, isCovered, onClick }) {
@@ -25,10 +25,10 @@ export default function Cell ({ rowPosition, colPosition, hasMine, numberOfMines
       let newState = ''
       if (isTagged === '') {
         newState = 'mined'
-        dispatch(tagCell())
+        dispatch(decreaseRemainingFlags())
       } else if (isTagged === 'mined') {
         newState = 'inconclusive'
-        dispatch(untagCell())
+        dispatch(increaseRemainingFlags())
       } else {
         newState = ''
       }
