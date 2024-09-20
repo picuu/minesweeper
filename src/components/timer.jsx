@@ -12,7 +12,7 @@ export function Timer () {
 
     if (gameStatus === 'playing') {
       timer.current = setInterval(() => {
-        setTime(pre => pre + 1)
+        setTime(pre => pre < 999 ? pre + 1 : pre)
       }, 1000)
     } else {
       clearInterval(timer.current)
