@@ -1,13 +1,13 @@
 'use client' // TODO Why do we need this here?
 import { useState, useEffect } from 'react'
-import Minefield from './minefield'
-import MockDataForm from './mockDataForm'
-import { StatusButton } from './statusButton'
-import { Timer } from './timer'
-import { MineCounter } from './mineCounter'
+import Minefield from '@/components/minefield'
+import MockDataForm from '@/components/mockDataForm'
+import { StatusButton } from '@/components/statusButton'
+import { Timer } from '@/components/timer'
+import { MineCounter } from '@/components/mineCounter'
 import '@/components/styles/game.css'
 
-export default function Game () {
+export default function Game() {
   const [mockDataFormVisible, setMockDataFormVisible] = useState(false)
   const [mockData, setMockData] = useState('')
 
@@ -19,12 +19,12 @@ export default function Game () {
     }
   }, [])
 
-  function setMockDataForm (data) {
+  function setMockDataForm(data) {
     setMockData(data)
     setMockDataFormVisible(false)
   }
 
-  function handleKeyPress (e) {
+  function handleKeyPress(e) {
     if (e.ctrlKey && e.key.toUpperCase() === 'M') {
       setMockDataFormVisible(!mockDataFormVisible)
     }
@@ -36,7 +36,7 @@ export default function Game () {
 
       {mockDataFormVisible && <MockDataForm setData={setMockDataForm} />}
 
-      <div className='board'>
+      <div className="board">
         <header>
           <MineCounter />
           <StatusButton />
