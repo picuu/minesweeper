@@ -1,8 +1,7 @@
 import '@/components/styles/timer.css'
 import { useEffect, useRef, useState } from 'react'
 import { useAppSelector } from '@/lib/hooks'
-
-type TimeoutType = ReturnType<typeof setTimeout>
+import { TimeoutType } from '@/types/types'
 
 export function Timer() {
   const { gameStatus } = useAppSelector((state) => state.gameStatus)

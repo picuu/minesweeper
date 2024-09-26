@@ -1,17 +1,19 @@
+import './styles/minefield.css'
 import { useState, useEffect } from 'react'
 import * as dataHelper from './helper/mineFieldData'
-import './styles/minefield.css'
+import Cell from '@/components/cell'
 
-import Cell from './cell'
-import { useDispatch, useSelector } from 'react-redux'
-import { playGame, winGame, loseGame } from '@/lib/slices/gameStatus/gameStatusSlice.ts'
-import { setRemainingFlags } from '@/lib/slices/remainingFlagsSlice/remainingFlagsSlice.ts'
+import { useAppDispatch, useAppSelector } from '@/lib/hooks'
+import { playGame, winGame, loseGame } from '@/lib/slices/gameStatus/gameStatusSlice'
+import { setRemainingFlags } from '@/lib/slices/remainingFlagsSlice/remainingFlagsSlice'
 
-export default function Minefield({ numberOfRows = 9, numberOfColumns = 9, numberOfMines = 10, mockData }) {
-  const [minefieldData, setMinefieldData] = useState([])
+import { BoardType, MinefieldProps } from '@/types/types'
+
+export default function Minefield({ numberOfRows = 9, numberOfColumns = 9, numberOfMines = 10, mockData }: MinefieldProps) {
+  const [minefieldData, setMinefieldData] = useState<BoardType>([])
   const [cellsToUncover, setCellsToUncover] = useState(-1)
-  const { gameStatus } = useSelector((state) => state.gameStatus)
-  const dispatch = useDispatch()
+  const { gameStatus } = useAppSelector((state) => state.gameStatus)
+  const dispatch = useAppDispatch()
 
   const directions = [
     { offsetX: 0, offsetY: -1 },
@@ -24,18 +26,22 @@ export default function Minefield({ numberOfRows = 9, numberOfColumns = 9, numbe
     { offsetX: 1, offsetY: 1 }
   ]
 
-  function uncoverNeighborCells(row, column, newMinefieldData) {
+  function uncoverNeighborCells(row: number, column: number, newMinefieldData: BoardType) {
     let counter = 0
     const newNumberOfRows = newMinefieldData.length
     const newNumberOfColumns = newMinefieldData[0].length
+
     for (let i = 0; i < directions.length; i += 1) {
       const newRow = row + directions[i].offsetY
       const newColumn = column + directions[i].offsetX
+
       if (newRow >= 1 && newRow <= newNumberOfRows && newColumn >= 1 && newColumn <= newNumberOfColumns) {
         const cell = newMinefieldData[newRow - 1][newColumn - 1]
+
         if (cell.isCovered) {
           cell.isCovered = false
           counter++
+
           if (cell.numberOfMinesAround === 0) {
             counter += uncoverNeighborCells(newRow, newColumn, newMinefieldData)
           }
@@ -45,8 +51,8 @@ export default function Minefield({ numberOfRows = 9, numberOfColumns = 9, numbe
     return counter
   }
 
-  function onClick(row, column) {
-    const newMinefieldData = [...minefieldData]
+  function onClick(row: number, column: number) {
+    const newMinefieldData: BoardType = [...minefieldData]
     let uncoveredCells
     if (newMinefieldData[row - 1][column - 1].isCovered === true) {
       newMinefieldData[row - 1][column - 1].isCovered = false
