@@ -1,11 +1,11 @@
-'use client' // TODO Why do we need this here?
+'use client'
+import '@/components/styles/game.css'
 import { useState, useEffect } from 'react'
 import Minefield from '@/components/minefield'
 import MockDataForm from '@/components/mockDataForm'
 import { StatusButton } from '@/components/statusButton'
 import { Timer } from '@/components/timer'
 import { MineCounter } from '@/components/mineCounter'
-import '@/components/styles/game.css'
 
 export default function Game() {
   const [mockDataFormVisible, setMockDataFormVisible] = useState(false)
@@ -19,12 +19,12 @@ export default function Game() {
     }
   }, [])
 
-  function setMockDataForm(data) {
+  function setMockDataForm(data: string) {
     setMockData(data)
     setMockDataFormVisible(false)
   }
 
-  function handleKeyPress(e) {
+  function handleKeyPress(e: KeyboardEvent) {
     if (e.ctrlKey && e.key.toUpperCase() === 'M') {
       setMockDataFormVisible(!mockDataFormVisible)
     }

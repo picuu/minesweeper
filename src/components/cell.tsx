@@ -1,23 +1,25 @@
-import { useState } from 'react'
 import './styles/cell.css'
+import { MouseEvent, useState } from 'react'
 
-import { useSelector, useDispatch } from 'react-redux'
-import { decreaseRemainingFlags, increaseRemainingFlags } from '@/lib/slices/remainingFlagsSlice/remainingFlagsSlice.ts'
-import { playGame } from '@/lib/slices/gameStatus/gameStatusSlice.ts'
+import { decreaseRemainingFlags, increaseRemainingFlags } from '@/lib/slices/remainingFlagsSlice/remainingFlagsSlice'
+import { playGame } from '@/lib/slices/gameStatus/gameStatusSlice'
+import { useAppDispatch, useAppSelector } from '@/lib/hooks'
 
-export default function Cell({ rowPosition, colPosition, hasMine, numberOfMinesAround, isCovered, onClick }) {
+import { CellProps } from '@/types/types'
+
+export default function Cell({ rowPosition, colPosition, hasMine, numberOfMinesAround, isCovered, onClick }: CellProps) {
   const [isTagged, setIsTagged] = useState('')
-  const { gameStatus } = useSelector((state) => state.gameStatus)
-  const dispatch = useDispatch()
+  const { gameStatus } = useAppSelector((state) => state.gameStatus)
+  const dispatch = useAppDispatch()
 
-  function handleClick(e) {
+  function handleClick(e: MouseEvent<HTMLButtonElement>) {
     e.preventDefault()
     if (!isTagged) {
       onClick(rowPosition, colPosition)
     }
   }
 
-  function handleContextMenu(e) {
+  function handleContextMenu(e: MouseEvent<HTMLButtonElement>) {
     e.preventDefault()
     if (gameStatus === 'playing' || gameStatus === 'waiting') {
       if (gameStatus === 'waiting') dispatch(playGame())
@@ -32,6 +34,7 @@ export default function Cell({ rowPosition, colPosition, hasMine, numberOfMinesA
       } else {
         newState = ''
       }
+
       setIsTagged(newState)
     }
   }
@@ -50,6 +53,7 @@ export default function Cell({ rowPosition, colPosition, hasMine, numberOfMinesA
   function getUncoveredCellImage() {
     let imgSource
     let altText
+
     if (hasMine) {
       if (isCovered) {
         imgSource = '/tiles/bombCell.png'
@@ -66,6 +70,7 @@ export default function Cell({ rowPosition, colPosition, hasMine, numberOfMinesA
         altText = 'Number of adjacent mines: ' + numberOfMinesAround
       }
     }
+
     return <img src={imgSource} alt={altText} />
   }
 
