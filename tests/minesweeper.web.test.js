@@ -1,5 +1,5 @@
 import { loadFeature, defineFeature } from 'jest-cucumber'
-import * as steps from './steps/minesweeper.steps'
+import * as steps from './steps/minesweeper.steps.tsx'
 
 const feature = loadFeature('./tests/features/minesweeper.web.feature')
 
@@ -23,7 +23,11 @@ defineFeature(feature, (test) => {
     })
   })
 
-  test('Waiting status, the remaining mines counter show the number of hidden mines, by default, 10', ({ given, then, pending }) => {
+  test('Waiting status, the remaining mines counter show the number of hidden mines, by default, 10', ({
+    given,
+    then,
+    pending
+  }) => {
     given('the player opens the game', () => {
       steps.openTheGame()
     })
@@ -43,7 +47,12 @@ defineFeature(feature, (test) => {
     })
   })
 
-  test('Waiting status, remaining clicking a cell, the game status should be playing, the button status show a happy face', ({ given, when, then, pending }) => {
+  test('Waiting status, remaining clicking a cell, the game status should be playing, the button status show a happy face', ({
+    given,
+    when,
+    then,
+    pending
+  }) => {
     given('the player opens the game', () => {
       steps.openTheGame()
     })
@@ -107,7 +116,7 @@ defineFeature(feature, (test) => {
     })
 
     and(/^the user waits "(.*)" second$/, async (seconds) => {
-      await new Promise(resolve => setTimeout(resolve, (Number(seconds) * 1000)))
+      await new Promise((resolve) => setTimeout(resolve, Number(seconds) * 1000))
     })
 
     then(/^the timer should show a number greater than "(.*)"$/, async (seconds) => {
@@ -205,7 +214,13 @@ defineFeature(feature, (test) => {
     })
   })
 
-  test('Tagging as mined more cells than the number of mines, the remaining mines counter is negative', ({ given, and, when, then, pending }) => {
+  test('Tagging as mined more cells than the number of mines, the remaining mines counter is negative', ({
+    given,
+    and,
+    when,
+    then,
+    pending
+  }) => {
     given('the player opens the game', () => {
       steps.openTheGame()
     })

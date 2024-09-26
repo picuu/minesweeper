@@ -1,5 +1,5 @@
 import { loadFeature, defineFeature } from 'jest-cucumber'
-import * as steps from './steps/minesweeper.steps'
+import * as steps from './steps/minesweeper.steps.tsx'
 
 const feature = loadFeature('./tests/features/minesweeper.core.feature')
 
@@ -148,7 +148,11 @@ defineFeature(feature, (test) => {
     })
   })
 
-  test('The user does not have enough information to predict the content of a cell, mouse right click over a tagged cell, tagging a cell as inconclusive', ({ given, when, then }) => {
+  test('The user does not have enough information to predict the content of a cell, mouse right click over a tagged cell, tagging a cell as inconclusive', ({
+    given,
+    when,
+    then
+  }) => {
     given('the player opens the game', () => {
       steps.openTheGame()
     })
@@ -265,7 +269,7 @@ defineFeature(feature, (test) => {
     })
   })
 
-  test('Finishing games - The cells don\'t allow changing tags', ({ given, when, then, and }) => {
+  test("Finishing games - The cells don't allow changing tags", ({ given, when, then, and }) => {
     given('the player opens the game', () => {
       steps.openTheGame()
     })
@@ -304,7 +308,13 @@ defineFeature(feature, (test) => {
     })
   })
 
-  test('A non empty cell uncovered by a neighbor cell - Not uncovering its neighbor cells', ({ given, when, then, and, pending }) => {
+  test('A non empty cell uncovered by a neighbor cell - Not uncovering its neighbor cells', ({
+    given,
+    when,
+    then,
+    and,
+    pending
+  }) => {
     given('the player opens the game', () => {
       steps.openTheGame()
     })
