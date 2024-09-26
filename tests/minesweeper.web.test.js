@@ -19,7 +19,6 @@ defineFeature(feature, (test) => {
     })
 
     then(/^the timer should be (\d+)$/, (timerValue) => {
-      console.log(steps.getTimerValue())
       expect(steps.getTimerValue()).toBe(Number(timerValue))
     })
   })

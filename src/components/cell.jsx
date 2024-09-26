@@ -2,22 +2,22 @@ import { useState } from 'react'
 import './styles/cell.css'
 
 import { useSelector, useDispatch } from 'react-redux'
-import { decreaseRemainingFlags, increaseRemainingFlags } from '@/lib/slices/remainingFlagsSlice/remainingFlagsSlice.js'
-import { playGame } from '@/lib/slices/gameStatus/gameStatusSlice.js'
+import { decreaseRemainingFlags, increaseRemainingFlags } from '@/lib/slices/remainingFlagsSlice/remainingFlagsSlice.ts'
+import { playGame } from '@/lib/slices/gameStatus/gameStatusSlice.ts'
 
-export default function Cell ({ rowPosition, colPosition, hasMine, numberOfMinesAround, isCovered, onClick }) {
+export default function Cell({ rowPosition, colPosition, hasMine, numberOfMinesAround, isCovered, onClick }) {
   const [isTagged, setIsTagged] = useState('')
-  const { gameStatus } = useSelector(state => state.gameStatus)
+  const { gameStatus } = useSelector((state) => state.gameStatus)
   const dispatch = useDispatch()
 
-  function handleClick (e) {
+  function handleClick(e) {
     e.preventDefault()
     if (!isTagged) {
       onClick(rowPosition, colPosition)
     }
   }
 
-  function handleContextMenu (e) {
+  function handleContextMenu(e) {
     e.preventDefault()
     if (gameStatus === 'playing' || gameStatus === 'waiting') {
       if (gameStatus === 'waiting') dispatch(playGame())
@@ -36,7 +36,7 @@ export default function Cell ({ rowPosition, colPosition, hasMine, numberOfMines
     }
   }
 
-  function getUncoveredCell () {
+  function getUncoveredCell() {
     return (
       <div
         data-testid={`minefield-cell cell-row${rowPosition}-col${colPosition}`}
@@ -47,7 +47,7 @@ export default function Cell ({ rowPosition, colPosition, hasMine, numberOfMines
     )
   }
 
-  function getUncoveredCellImage () {
+  function getUncoveredCellImage() {
     let imgSource
     let altText
     if (hasMine) {
@@ -66,30 +66,27 @@ export default function Cell ({ rowPosition, colPosition, hasMine, numberOfMines
         altText = 'Number of adjacent mines: ' + numberOfMinesAround
       }
     }
-    return (
-      <img
-        src={imgSource}
-        alt={altText}
-      />
-    )
+    return <img src={imgSource} alt={altText} />
   }
 
   if (!isCovered || (gameStatus === 'lost' && hasMine)) {
-    return (
-      getUncoveredCell()
-    )
+    return getUncoveredCell()
   } else {
     return (
       <button
         onClick={handleClick}
         onContextMenu={handleContextMenu}
         data-testid={`minefield-cell cell-row${rowPosition}-col${colPosition}`}
-        className='minefield-cell covered'
+        className="minefield-cell covered"
         disabled={gameStatus !== 'playing' && gameStatus !== 'waiting'}
       >
-        {((hasMine && gameStatus === 'won') || (isTagged === 'mined' && gameStatus === 'playing')) && <img src='/tiles/flagCell.png' alt='Flaged cell' />}
-        {(isTagged === 'mined' && !hasMine && gameStatus === 'lost') && <img src='/tiles/notBombCell.png' alt='Wrongly tagged mine' />}
-        {isTagged === 'inconclusive' && <img src='/tiles/inconclusiveCell.png' alt='Inconclusive cell' />}
+        {((hasMine && gameStatus === 'won') || (isTagged === 'mined' && gameStatus === 'playing')) && (
+          <img src="/tiles/flagCell.png" alt="Flaged cell" />
+        )}
+        {isTagged === 'mined' && !hasMine && gameStatus === 'lost' && (
+          <img src="/tiles/notBombCell.png" alt="Wrongly tagged mine" />
+        )}
+        {isTagged === 'inconclusive' && <img src="/tiles/inconclusiveCell.png" alt="Inconclusive cell" />}
       </button>
     )
   }

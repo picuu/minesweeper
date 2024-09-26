@@ -4,13 +4,13 @@ import './styles/minefield.css'
 
 import Cell from './cell'
 import { useDispatch, useSelector } from 'react-redux'
-import { playGame, winGame, loseGame } from '@/lib/slices/gameStatus/gameStatusSlice.js'
-import { setRemainingFlags } from '@/lib/slices/remainingFlagsSlice/remainingFlagsSlice.js'
+import { playGame, winGame, loseGame } from '@/lib/slices/gameStatus/gameStatusSlice.ts'
+import { setRemainingFlags } from '@/lib/slices/remainingFlagsSlice/remainingFlagsSlice.ts'
 
-export default function Minefield ({ numberOfRows = 9, numberOfColumns = 9, numberOfMines = 10, mockData }) {
+export default function Minefield({ numberOfRows = 9, numberOfColumns = 9, numberOfMines = 10, mockData }) {
   const [minefieldData, setMinefieldData] = useState([])
   const [cellsToUncover, setCellsToUncover] = useState(-1)
-  const { gameStatus } = useSelector(state => state.gameStatus)
+  const { gameStatus } = useSelector((state) => state.gameStatus)
   const dispatch = useDispatch()
 
   const directions = [
@@ -24,7 +24,7 @@ export default function Minefield ({ numberOfRows = 9, numberOfColumns = 9, numb
     { offsetX: 1, offsetY: 1 }
   ]
 
-  function uncoverNeighborCells (row, column, newMinefieldData) {
+  function uncoverNeighborCells(row, column, newMinefieldData) {
     let counter = 0
     const newNumberOfRows = newMinefieldData.length
     const newNumberOfColumns = newMinefieldData[0].length
@@ -45,7 +45,7 @@ export default function Minefield ({ numberOfRows = 9, numberOfColumns = 9, numb
     return counter
   }
 
-  function onClick (row, column) {
+  function onClick(row, column) {
     const newMinefieldData = [...minefieldData]
     let uncoveredCells
     if (newMinefieldData[row - 1][column - 1].isCovered === true) {
@@ -89,11 +89,11 @@ export default function Minefield ({ numberOfRows = 9, numberOfColumns = 9, numb
   }, [mockData])
 
   return (
-    <div data-testid='minefield'>
+    <div data-testid="minefield">
       {/* <div data-testid='mockdata-title'>Mock data: {mockData}</div>
       <div>minefieldData.length:{minefieldData.length}</div> */}
       {minefieldData.map((row, rowIndex) => (
-        <div className='minefield-row' data-testid='minefield-row' key={rowIndex}>
+        <div className="minefield-row" data-testid="minefield-row" key={rowIndex}>
           {row.map((cell, cellIndex) => (
             <Cell
               key={cellIndex}
