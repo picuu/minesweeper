@@ -76,6 +76,8 @@ export default function Minefield({ numberOfRows = 9, numberOfColumns = 9, numbe
   }
 
   useEffect(() => {
+    if (gameStatus !== 'waiting') return
+
     let preData
     if (mockData.includes('|')) {
       mockData = dataHelper.parseMockDataToString(mockData)
@@ -92,7 +94,7 @@ export default function Minefield({ numberOfRows = 9, numberOfColumns = 9, numbe
     setMinefieldData(preData)
 
     dispatch(setRemainingFlags(dataHelper.getNumberOfMines(preData)))
-  }, [mockData])
+  }, [mockData, gameStatus])
 
   return (
     <div data-testid="minefield">

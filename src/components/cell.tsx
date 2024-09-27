@@ -1,5 +1,5 @@
 import './styles/cell.css'
-import { MouseEvent, useState } from 'react'
+import { MouseEvent, useEffect, useState } from 'react'
 
 import { decreaseRemainingFlags, increaseRemainingFlags } from '@/lib/slices/remainingFlagsSlice/remainingFlagsSlice.ts'
 import { playGame } from '@/lib/slices/gameStatus/gameStatusSlice.ts'
@@ -38,6 +38,12 @@ export default function Cell({ rowPosition, colPosition, hasMine, numberOfMinesA
       setIsTagged(newState)
     }
   }
+
+  useEffect(() => {
+    if (gameStatus !== 'waiting') return
+
+    setIsTagged('')
+  }, [gameStatus])
 
   function getUncoveredCell() {
     return (

@@ -9,7 +9,7 @@ export function Timer() {
   const [time, setTime] = useState(0)
 
   useEffect(() => {
-    if (gameStatus === 'waiting') return
+    if (gameStatus === 'waiting') return setTime(0)
 
     if (gameStatus === 'playing') {
       timer.current = setInterval(() => {

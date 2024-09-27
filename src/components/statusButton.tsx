@@ -1,8 +1,16 @@
 import '@/components/styles/statusButton.css'
-import { useAppSelector } from '@/lib/hooks.ts'
+import { MouseEvent } from 'react'
+import { waitGame } from '@/lib/slices/gameStatus/gameStatusSlice.ts'
+import { useAppSelector, useAppDispatch } from '@/lib/hooks.ts'
 
 export function StatusButton() {
   const { gameStatus } = useAppSelector((state) => state.gameStatus)
+  const dispatch = useAppDispatch()
+
+  const handleClick = (e: MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault()
+    dispatch(waitGame())
+  }
 
   const getFace = (status: string) => {
     if (status === 'won') {
@@ -17,7 +25,7 @@ export function StatusButton() {
   const { fileName, altText } = getFace(gameStatus)
 
   return (
-    <button data-testid="status-button" className="status-button">
+    <button data-testid="status-button" className="status-button" onClick={handleClick}>
       <img src={`/faces/${fileName}.png`} alt={altText} />
     </button>
   )
