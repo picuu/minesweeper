@@ -13,9 +13,9 @@ export function MineCounter() {
       isNegative = true
     }
 
-    let firstDigit = Math.round((numberOfMines % 1000) / 100)
-    let secondDigit = Math.round((numberOfMines % 100) / 10)
-    const thirdDigit: number = Math.round(numberOfMines % 10)
+    let firstDigit = Math.floor((numberOfMines % 1000) / 100)
+    let secondDigit = Math.floor((numberOfMines % 100) / 10)
+    const thirdDigit: number = Math.floor(numberOfMines % 10)
 
     if (isNegative) {
       if (numberOfMines >= 10) {

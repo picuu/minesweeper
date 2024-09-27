@@ -22,9 +22,9 @@ export function Timer() {
     return () => clearInterval(timer.current)
   }, [gameStatus])
 
-  const firstDigit: number = Math.round((time % 1000) / 100)
-  const secondDigit: number = Math.round((time % 100) / 10)
-  const thirdDigit: number = Math.round(time % 10)
+  const firstDigit: number = Math.floor((time % 1000) / 100)
+  const secondDigit: number = Math.floor((time % 100) / 10)
+  const thirdDigit: number = Math.floor(time % 10)
 
   return (
     <div className="timer" data-testid="timer">
