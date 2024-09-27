@@ -259,11 +259,11 @@ export function isDeadFace(): boolean {
   return isAltTextInStatusButton('dead face')
 }
 
-export function getTimerValue(): number | boolean {
+export function getTimerValue(): number {
   const timer = getTimer()
 
   const images = timer.getElementsByTagName('img')
-  if (images.length < 3) return false
+  if (images.length < 3) return 0
   else {
     let timerValue = Number(images[images.length - 1].alt)
     timerValue = timerValue + 10 * Number(images[images.length - 2].alt)
