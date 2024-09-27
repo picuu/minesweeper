@@ -1,5 +1,5 @@
 import '@/components/styles/statusButton.css'
-import { useAppSelector } from '@/lib/hooks'
+import { useAppSelector } from '@/lib/hooks.ts'
 
 export function StatusButton() {
   const { gameStatus } = useAppSelector((state) => state.gameStatus)

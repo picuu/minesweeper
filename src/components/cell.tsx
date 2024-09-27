@@ -1,11 +1,11 @@
 import './styles/cell.css'
 import { MouseEvent, useState } from 'react'
 
-import { decreaseRemainingFlags, increaseRemainingFlags } from '@/lib/slices/remainingFlagsSlice/remainingFlagsSlice'
-import { playGame } from '@/lib/slices/gameStatus/gameStatusSlice'
-import { useAppDispatch, useAppSelector } from '@/lib/hooks'
+import { decreaseRemainingFlags, increaseRemainingFlags } from '@/lib/slices/remainingFlagsSlice/remainingFlagsSlice.ts'
+import { playGame } from '@/lib/slices/gameStatus/gameStatusSlice.ts'
+import { useAppDispatch, useAppSelector } from '@/lib/hooks.ts'
 
-import { CellProps } from '@/types/types'
+import type { CellProps } from '@/types/types.d.ts'
 
 export default function Cell({ rowPosition, colPosition, hasMine, numberOfMinesAround, isCovered, onClick }: CellProps) {
   const [isTagged, setIsTagged] = useState('')

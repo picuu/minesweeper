@@ -1,11 +1,11 @@
 'use client'
 import '@/components/styles/game.css'
 import { useState, useEffect } from 'react'
-import Minefield from '@/components/minefield'
-import MockDataForm from '@/components/mockDataForm'
-import { StatusButton } from '@/components/statusButton'
-import { Timer } from '@/components/timer'
-import { MineCounter } from '@/components/mineCounter'
+import Minefield from '@/components/minefield.tsx'
+import MockDataForm from '@/components/mockDataForm.tsx'
+import { StatusButton } from '@/components/statusButton.tsx'
+import { Timer } from '@/components/timer.tsx'
+import { MineCounter } from '@/components/mineCounter.tsx'
 
 export default function Game() {
   const [mockDataFormVisible, setMockDataFormVisible] = useState(false)

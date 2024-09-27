@@ -1,5 +1,5 @@
 import '@/components/styles/mineCounter.css'
-import { useAppSelector } from '@/lib/hooks'
+import { useAppSelector } from '@/lib/hooks.ts'
 
 export function MineCounter() {
   const { remainingFlags } = useAppSelector((state) => state.remainingFlags)

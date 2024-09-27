@@ -1,4 +1,4 @@
-import { BoardType } from '@/types/types'
+import type { BoardType } from '@/types/types.d.ts'
 
 export function validateMockData(mockData: string): boolean {
   if (mockData === '') {

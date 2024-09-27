@@ -1,6 +1,6 @@
 import { render, screen, fireEvent } from '@testing-library/react'
-import Game from '@/components/game'
-import StoreProvider from '@/app/StoreProvider'
+import Game from '@/components/game.tsx'
+import StoreProvider from '@/app/StoreProvider.tsx'
 
 const directions = [
   { offsetX: 0, offsetY: -1 },

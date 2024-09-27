@@ -1,13 +1,13 @@
 import './styles/minefield.css'
 import { useState, useEffect } from 'react'
-import * as dataHelper from './helper/mineFieldData'
-import Cell from '@/components/cell'
+import * as dataHelper from './helper/mineFieldData.ts'
+import Cell from '@/components/cell.tsx'
 
-import { useAppDispatch, useAppSelector } from '@/lib/hooks'
-import { playGame, winGame, loseGame } from '@/lib/slices/gameStatus/gameStatusSlice'
-import { setRemainingFlags } from '@/lib/slices/remainingFlagsSlice/remainingFlagsSlice'
+import { useAppDispatch, useAppSelector } from '@/lib/hooks.ts'
+import { playGame, winGame, loseGame } from '@/lib/slices/gameStatus/gameStatusSlice.ts'
+import { setRemainingFlags } from '@/lib/slices/remainingFlagsSlice/remainingFlagsSlice.ts'
 
-import { BoardType, MinefieldProps } from '@/types/types'
+import type { BoardType, MinefieldProps } from '@/types/types.d.ts'
 
 export default function Minefield({ numberOfRows = 9, numberOfColumns = 9, numberOfMines = 10, mockData }: MinefieldProps) {
   const [minefieldData, setMinefieldData] = useState<BoardType>([])
