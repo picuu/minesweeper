@@ -1,26 +1,10 @@
 import '@/components/styles/timer.css'
-import { useEffect, useRef, useState } from 'react'
+import { useTimer } from '@/customHooks/useTimer'
 import { useAppSelector } from '@/lib/hooks.ts'
-import type { TimeoutType } from '@/types/types.d.ts'
 
 export function Timer() {
   const { gameStatus } = useAppSelector((state) => state.gameStatus)
-  const timer = useRef<TimeoutType>()
-  const [time, setTime] = useState(0)
-
-  useEffect(() => {
-    if (gameStatus === 'waiting') return setTime(0)
-
-    if (gameStatus === 'playing') {
-      timer.current = setInterval(() => {
-        setTime((pre) => (pre < 999 ? pre + 1 : pre))
-      }, 1000)
-    } else {
-      clearInterval(timer.current)
-    }
-
-    return () => clearInterval(timer.current)
-  }, [gameStatus])
+  const time = useTimer({ maxValue: 999, restart: gameStatus === 'waiting', start: gameStatus === 'playing' })
 
   const firstDigit: number = Math.floor((time % 1000) / 100)
   const secondDigit: number = Math.floor((time % 100) / 10)
