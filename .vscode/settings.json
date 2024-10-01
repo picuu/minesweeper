@@ -22,6 +22,41 @@
   "standard.options": {
     "env": ["jest"]
   },
+  "standard.engine": "ts-standard",
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "[javascript, typescript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "standard.validate": ["javascript", "javascriptreact", "typescript", "typescriptreact"],
+  "prettier.printWidth": 130,
+  "prettier.singleQuote": true,
+  "prettier.trailingComma": "none",
+  "prettier.semi": false,
+  "eslint.format.enable": true,
+
+  // ESLINT
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": "always"
+  },
+  "eslint.enable": true,
+  "eslint.validate": ["javascript", "javascriptreact", "typescript", "typescriptreact"],
+  "eslint.nodePath": ".yarn/sdks",
+  "eslint.lintTask.enable": true,
+  "eslint.probe": [
+    "astro",
+    "javascript",
+    "javascriptreact",
+    "typescript",
+    "typescriptreact",
+    "html",
+    "mdx",
+    "vue",
+    "markdown",
+    "json",
+    "jsonc",
+    "react"
+  ],
+
   "cucumberautocomplete.syncfeatures": "tests/**/*.feature",
   "cucumberautocomplete.steps": ["tests/**/*.js"],
   "typescript.tsdk": "node_modules\\typescript\\lib"
