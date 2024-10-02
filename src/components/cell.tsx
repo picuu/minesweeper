@@ -1,5 +1,6 @@
-import './styles/cell.css'
+// import './styles/cell.css'
 import { MouseEvent, useEffect, useState } from 'react'
+import { MinefieldCell, MinefieldCellUncovered } from './styled/MinefieldCell.ts'
 
 import { decreaseRemainingFlags, increaseRemainingFlags } from '@/lib/slices/remainingFlagsSlice/remainingFlagsSlice.ts'
 import { playGame } from '@/lib/slices/gameStatus/gameStatusSlice.ts'
@@ -47,12 +48,12 @@ export default function Cell({ rowPosition, colPosition, hasMine, numberOfMinesA
 
   function getUncoveredCell() {
     return (
-      <div
+      <MinefieldCellUncovered
         data-testid={`minefield-cell cell-row${rowPosition}-col${colPosition}`}
         className={`minefield-cell ${hasMine && 'highlighted'}`}
       >
         {getUncoveredCellImage()}
-      </div>
+      </MinefieldCellUncovered>
     )
   }
 
@@ -84,7 +85,7 @@ export default function Cell({ rowPosition, colPosition, hasMine, numberOfMinesA
     return getUncoveredCell()
   } else {
     return (
-      <button
+      <MinefieldCell
         onClick={handleClick}
         onContextMenu={handleContextMenu}
         data-testid={`minefield-cell cell-row${rowPosition}-col${colPosition}`}
@@ -98,7 +99,7 @@ export default function Cell({ rowPosition, colPosition, hasMine, numberOfMinesA
           <img src="/tiles/notBombCell.png" alt="Wrongly tagged mine" />
         )}
         {isTagged === 'inconclusive' && <img src="/tiles/inconclusiveCell.png" alt="Inconclusive cell" />}
-      </button>
+      </MinefieldCell>
     )
   }
 }
